@@ -1,14 +1,17 @@
 package Components;
 
+import Handlers.TopicSubsriber;
+import lombok.Data;
 import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class Topic {
     private String topicName;
     private String topicId;
-    private List<Subsriber> topicSubscribers;
+    private List<TopicSubsriber> topicSubscribers;
     private List<Message> messages;
 
     public Topic(@NonNull String topicName, @NonNull String topicId) {
@@ -19,16 +22,11 @@ public class Topic {
     }
 
 
-    public void publishMessages(@NonNull Message message) {
+    public void addMessages(@NonNull Message message) {
         messages.add(message);
-        sendToAllSubsribers();
     }
 
-    public void addSubsriber(@NonNull Subsriber subsriber) {
+    public void addSubsriber(@NonNull TopicSubsriber subsriber) {
         topicSubscribers.add(subsriber);
-    }
-
-    private void sendToAllSubsribers() {
-
     }
 }

@@ -1,12 +1,7 @@
 package Components;
 
+public interface Subsriber {
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-public class Subsriber {
-
-    public AtomicInteger offset;
-    public void consume(Message message) {
-        System.out.printf("Consuming message : {}", message.getMsg());
-    }
+    public String getId();
+    public void consume(Message message) throws InterruptedException;
 }
