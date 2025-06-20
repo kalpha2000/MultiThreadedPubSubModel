@@ -18,23 +18,25 @@ public class ExampleMQ {
         // s1,s2 -> t1
         // s3 -> t2
 
-        Subscriber sub1 = new Subscriber("s1", 2000);
-        Subscriber sub2 = new Subscriber("s2", 4000);
-        Subscriber sub3 = new Subscriber("s3", 2000);
+        Subscriber sub1 = new Subscriber("s1", 200);
+        Subscriber sub2 = new Subscriber("s2", 400);
+        Subscriber sub3 = new Subscriber("s3", 200);
 
         mq.subscribe(topic1, sub1);
-        mq.subscribe(topic1, sub2);
+
         mq.subscribe(topic2, sub3);
 
         mq.publishMessage(topic1, Message.builder().msg("m1").build());
         mq.publishMessage(topic2, Message.builder().msg("m2").build());
         mq.publishMessage(topic1, Message.builder().msg("m3").build());
 
-        Thread.sleep(15000);
+        Thread.sleep(1500);
         mq.publishMessage(topic2, new Message("m4"));
         mq.publishMessage(topic1, new Message("m5"));
 
-        mq.resetOffset(topic1, sub2, 1);
+//        mq.resetOffset(topic1, sub2, 1);
+        Thread.sleep(5000);
+        mq.subscribe(topic1, sub2);
 
     }
 }

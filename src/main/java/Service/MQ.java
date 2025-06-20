@@ -29,8 +29,10 @@ public class MQ {
     }
 
     public void subscribe(@NonNull Topic topic, @NonNull Subsriber subsriber) {
-        topic.addSubsriber(new TopicSubsriber(subsriber));
+        TopicSubsriber topicSubsriber = new TopicSubsriber(subsriber);
+        topic.addSubsriber(topicSubsriber);
         System.out.println(subsriber.getId() + " subscribed to topic: " + topic.getTopicName());
+        new Thread(() -> topicHandlers.get(topic.getTopicId()).startWorker(topicSubsriber)).start();
     }
 
     public void publishMessage(@NonNull Topic topic, @NonNull Message message) {
